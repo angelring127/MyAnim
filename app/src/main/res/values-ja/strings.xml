@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">私のアニメ</string>
+    <string name="favorite">一番好き</string>
+    <string name="mypage">俺のもの</string>
+    <string name="search">検索</string>
+    <string name="title">タイトル</string>
+    <string name="year">年度</string>
+    <string name="login">ログイン</string>
+    <string name="join">会員加入</string>
+    <string name="password">パスワード</string>
+    <string name="id">ID</string>
+    <string name="cancel">取り消し</string>
+</resources>

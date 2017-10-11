@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">나만의애니</string>
+    <string name="favorite">가장좋아하는것</string>
+    <string name="mypage">내껏</string>
+    <string name="search">검색</string>
+    <string name="title">제목</string>
+    <string name="year">연도</string>
+    <string name="login">login</string>
+    <string name="join">join</string>
+    <string name="password">password</string>
+    <string name="id">ID</string>
+    <string name="pw">PW</string>
+    <string name="pwchk">PW chk</string>
+    <string name="cancel">cancel</string>
+</resources>
