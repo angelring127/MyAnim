@@ -1,15 +1,19 @@
 package com.example.sanghoyoun.myanim;
 
+import java.io.Serializable;
+
 /**
  * Created by sanghoyoun on 2017. 10. 4..
  */
 
-public class ListItem {
+public class ListItem implements Serializable{
 
     private String profileImage;
     private String animTitle;
     private String animYear;
     private Double favorRate;
+    private String loginID;
+    private String anim_ID;
 
     public ListItem() {
     }
@@ -52,5 +56,21 @@ public class ListItem {
 
     public void setFavorRate(Double favorRate) {
         this.favorRate = favorRate;
+    }
+
+    public String getLoginID() {
+        return loginID;
+    }
+
+    public void setLoginID(String loginID) {
+        this.loginID = loginID;
+    }
+
+    public String getAnim_ID() {
+        return anim_ID;
+    }
+
+    public void setAnim_ID(String anim_ID) {
+        this.anim_ID = anim_ID;
     }
 }

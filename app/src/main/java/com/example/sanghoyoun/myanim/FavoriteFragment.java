@@ -185,6 +185,8 @@ public class FavoriteFragment extends Fragment implements RecyclerView.OnScrollC
                 myanim.setProfileImage(json.getString(Config.TAG_IMAGE_URL));
                 myanim.setAnimTitle(json.getString(Config.TAG_NAME));
                 myanim.setAnimYear(json.getString(Config.TAG_YEAR));
+                myanim.setAnim_ID(json.getString(Config.TAG_ANIM_ID));
+                myanim.setLoginID(loginID);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
