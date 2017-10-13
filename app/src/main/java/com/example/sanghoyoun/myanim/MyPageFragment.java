@@ -141,7 +141,7 @@ public class MyPageFragment extends android.support.v4.app.Fragment implements R
         getActivity().setProgressBarIndeterminateVisibility(true);
 
         //JsonArrayRequest of volley
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Config.DATA_URL + loginID + "&page="+String.valueOf(requestCount),
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Config.DATA_MYPAGE + loginID + "&page="+String.valueOf(requestCount),
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -189,6 +189,7 @@ public class MyPageFragment extends android.support.v4.app.Fragment implements R
                 myanim.setAnimTitle(json.getString(Config.TAG_NAME));
                 myanim.setAnimYear(json.getString(Config.TAG_YEAR));
                 myanim.setAnim_ID(json.getString(Config.TAG_ANIM_ID));
+                myanim.setFavorRate(json.getDouble(Config.TAG_RATE));
                 myanim.setLoginID(loginID);
             } catch (JSONException e) {
                 e.printStackTrace();

@@ -9,6 +9,7 @@ public class Config {
     public static final String DATA_URL = "http://angelring127.000webhostapp.com/feed.php?loginid=";
     public static final String DATA_MAINURL ="http://angelring127.000webhostapp.com/";
     public static final String DATA_LISTURL = "http://angelring127.000webhostapp.com/outputcoment.php?animid=";
+    public static final String DATA_MYPAGE = "http://angelring127.000webhostapp.com/mypage.php?loginid=";
 
     //JSON TAGS
     public static final String TAG_ANIM_ID = "id";
@@ -16,4 +17,5 @@ public class Config {
     public static final String TAG_NAME = "name";
     public static final String TAG_YEAR = "dateY";
     public static final String TAG_NAMEJA = "nameJa";
+    public static final String TAG_RATE = "rate";
 }

@@ -185,6 +185,7 @@ public class LoginActivity extends AppCompatActivity{
             }
             else if(result.equals("0"))
             {
+                dialog.dismiss();
                 Log.e("RESULT","비밀번호가 일치하지 않습니다.");
                 alertBuilder
                         .setTitle("알림")
@@ -201,6 +202,7 @@ public class LoginActivity extends AppCompatActivity{
             }
             else
             {
+                dialog.dismiss();
                 Log.e("RESULT","에러 발생! ERRCODE = " + result);
                 alertBuilder
                         .setTitle("알림")

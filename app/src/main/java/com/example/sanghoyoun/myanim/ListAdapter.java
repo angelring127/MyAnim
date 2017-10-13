@@ -88,6 +88,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
         holder.animImageView.setImageUrl(anim.getProfileImage(), imageLoader);
         holder.titleTextView.setText(anim.getAnimTitle());
         holder.yearTextView.setText(anim.getAnimYear());
+        holder.favorRatingBar.setRating(Float.parseFloat(Double.toString(anim.getFavorRate())));
 
         holder.animImageView.setOnClickListener(new View.OnClickListener() {
             @Override

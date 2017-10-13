@@ -11,7 +11,7 @@ public class ListItem implements Serializable{
     private String profileImage;
     private String animTitle;
     private String animYear;
-    private Double favorRate;
+    private Double favorRate = 0.0;
     private String loginID;
     private String anim_ID;
     private int    country_ID;
