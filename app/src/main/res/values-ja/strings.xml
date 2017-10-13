@@ -13,4 +13,6 @@
     <string name="name">名前</string>
     <string name="trans">翻訳</string>
     <string name="insert">入力</string>
+    <string name="pw">PW</string>
+    <string name="pwchk">PW chk</string>
 </resources>

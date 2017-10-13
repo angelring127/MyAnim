@@ -75,6 +75,13 @@ public class JoinActivity extends AppCompatActivity implements AdapterView.OnIte
 
     }
 
+    //cancel
+    public void CancelJoin(View v){
+        Intent intent = new Intent(this,LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     /* onClick에서 정의한 이름과 똑같은 이름으로 생성 */
     public void bt_Join(View view)
     {
@@ -149,6 +156,10 @@ public class JoinActivity extends AppCompatActivity implements AdapterView.OnIte
 
                     startActivity(intent);
                     finish();
+                }
+                else {
+                    progressBar.dismiss();
+
                 }
 
             } catch (MalformedURLException e) {
