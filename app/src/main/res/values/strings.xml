@@ -12,4 +12,7 @@
     <string name="pw">PW</string>
     <string name="pwchk">PW chk</string>
     <string name="cancel">cancel</string>
+    <string name="name">Name</string>
+    <string name="trans">trans</string>
+    <string name="insert">insert</string>
 </resources>

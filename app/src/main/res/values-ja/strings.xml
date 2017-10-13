@@ -10,4 +10,7 @@
     <string name="password">パスワード</string>
     <string name="id">ID</string>
     <string name="cancel">取り消し</string>
+    <string name="name">名前</string>
+    <string name="trans">翻訳</string>
+    <string name="insert">入力</string>
 </resources>

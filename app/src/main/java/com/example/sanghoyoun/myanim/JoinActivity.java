@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,14 +38,14 @@ import java.util.HashMap;
  * Created by sanghoyoun on 2017. 10. 7..
  */
 
+
 public class JoinActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
-    EditText et_id, et_pw, et_pw_chk;
-    String sId, sPw, sPw_chk;
+    EditText et_id, et_pw, et_pw_chk,et_name;
+    String sId, sPw, sPw_chk,sName;
     int counNum = 0;
     Spinner countrySpinner;
-
-    private static final String[] items = { "Japan","Korea"};
+    ProgressDialog progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +55,13 @@ public class JoinActivity extends AppCompatActivity implements AdapterView.OnIte
         et_id = (EditText) findViewById(R.id.inputId);
         et_pw = (EditText) findViewById(R.id.inputPw);
         et_pw_chk = (EditText) findViewById(R.id.inputPwck);
+        et_name = (EditText) findViewById(R.id.inputName);
         countrySpinner = (Spinner) findViewById(R.id.countrySpinner);
         countrySpinner.setOnItemSelectedListener(this);
+        progressBar = new ProgressDialog(this);
+        progressBar.setMessage("loading...");
+        progressBar.setCancelable(false);
+
 
     }
 
@@ -76,11 +82,13 @@ public class JoinActivity extends AppCompatActivity implements AdapterView.OnIte
         sId = et_id.getText().toString();
         sPw = et_pw.getText().toString();
         sPw_chk = et_pw_chk.getText().toString();
+        sName = et_name.getText().toString();
 
         if(sPw.equals(sPw_chk))
         {
         /* 패스워드 확인이 정상적으로 됨 */
             registDB rdb = new registDB();
+            progressBar.show();
             rdb.execute();
 
         }
@@ -98,10 +106,10 @@ public class JoinActivity extends AppCompatActivity implements AdapterView.OnIte
         @Override
         protected Void doInBackground(Void... unused) {
 
-/* 인풋 파라메터값 생성 */
-            String param = "u_id=" + sId + "&u_pw=" + sPw + "&u_cn=" + counNum +"";
+            /* 인풋 파라메터값 생성 */
+            String param = "u_id=" + sId + "&u_name=" + sName +"&u_pw=" + sPw + "&u_cn=" + counNum +"";
             try {
-/* 서버연결 */
+            /* 서버연결 */
                 URL url = new URL(Config.DATA_MAINURL+
                         "insert.php");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -110,13 +118,13 @@ public class JoinActivity extends AppCompatActivity implements AdapterView.OnIte
                 conn.setDoInput(true);
                 conn.connect();
 
-/* 안드로이드 -> 서버 파라메터값 전달 */
+            /* 안드로이드 -> 서버 파라메터값 전달 */
                 OutputStream outs = conn.getOutputStream();
                 outs.write(param.getBytes("UTF-8"));
                 outs.flush();
                 outs.close();
 
-/* 서버 -> 안드로이드 파라메터값 전달 */
+            /* 서버 -> 안드로이드 파라메터값 전달 */
                 InputStream is = null;
                 BufferedReader in = null;
                 String data = "";
@@ -134,6 +142,7 @@ public class JoinActivity extends AppCompatActivity implements AdapterView.OnIte
 
                 if(data.equals("0000")){
                     Log.e("RESULT","성공적으로 처리되었습니다");
+                    progressBar.dismiss();
                     Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
                     intent.putExtra("Id",sId);
                     intent.putExtra("Pw",sPw);

@@ -14,6 +14,7 @@ public class ListItem implements Serializable{
     private Double favorRate;
     private String loginID;
     private String anim_ID;
+    private int    country_ID;
 
     public ListItem() {
     }
@@ -72,5 +73,13 @@ public class ListItem implements Serializable{
 
     public void setAnim_ID(String anim_ID) {
         this.anim_ID = anim_ID;
+    }
+
+    public int getCountry_ID() {
+        return country_ID;
+    }
+
+    public void setCountry_ID(int country_ID) {
+        this.country_ID = country_ID;
     }
 }

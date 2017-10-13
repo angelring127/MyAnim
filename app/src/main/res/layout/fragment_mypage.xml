@@ -7,9 +7,17 @@
     android:orientation="vertical"
     tools:context="com.example.sanghoyoun.myanim.MainActivity">
 
-    <TextView
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/mypage"
-        />
+        android:layout_centerInParent="true" />
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
 </LinearLayout>

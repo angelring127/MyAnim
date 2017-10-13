@@ -38,6 +38,7 @@ public class LoginActivity extends AppCompatActivity{
     EditText inputId,inputPw;
     String sId, sPw, sPw_chk;
     AlertDialog.Builder alertBuilder;
+    ProgressDialog dialog;
     String result = "-1";
 
 
@@ -49,6 +50,14 @@ public class LoginActivity extends AppCompatActivity{
         inputId = (EditText) findViewById(R.id.edtLogin);
         inputPw = (EditText) findViewById(R.id.edtPass);
         alertBuilder = new AlertDialog.Builder(this);
+        dialog = new ProgressDialog(this);
+        dialog.setMessage("Loading....");
+        dialog.setCancelable(false);
+
+        Intent intent = getIntent();
+
+        inputId.setText(intent.getStringExtra("Id"));
+        inputPw.setText(intent.getStringExtra("Pw"));
 
 
     }
@@ -69,6 +78,7 @@ public class LoginActivity extends AppCompatActivity{
 
         loginDB lDB = new loginDB();
         lDB.execute();
+        dialog.show();
         /*
         Intent intent = new Intent(getApplicationContext(),MainActivity.class);
 
@@ -80,6 +90,7 @@ public class LoginActivity extends AppCompatActivity{
         Intent intent = new Intent(getApplicationContext(),JoinActivity.class);
 
         startActivity(intent);
+        finish();
     }
 
     public class loginDB extends AsyncTask<Void, Integer, Void> {
@@ -154,6 +165,7 @@ public class LoginActivity extends AppCompatActivity{
 
             if(result.equalsIgnoreCase("User found"))
             {
+                dialog.dismiss();
                 Log.e("RESULT","성공적으로 처리되었습니다!");
                 alertBuilder
                         .setTitle("알림")

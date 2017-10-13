@@ -1,5 +1,6 @@
 package com.example.sanghoyoun.myanim;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -52,7 +53,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
     String result = "-1";
     private String loginID = null;
 
-
+    ProgressDialog progressDialog;
 
     //Construct of this class
     public ListAdapter(List<ListItem> anim,Context context) {
@@ -65,14 +66,19 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item, parent, false);
         ViewHolder viewHolder = new ViewHolder(v);
+        progressDialog = new ProgressDialog(parent.getContext());
+        progressDialog.setMessage("Loading....");
+        progressDialog.setCancelable(false);
+
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
 
         //Getting the particular item from the list
         final ListItem anim =  animList.get(position);
+
 
         //Loading image from url
         imageLoader = CustomVolleyRequest.getInstance(context).getImageLoader();
@@ -100,6 +106,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
                 if(loginID != null){
                     changeRate CHR = new changeRate(anim.getLoginID(),anim.getAnim_ID(),v);
                     CHR.execute();
+                    progressDialog.show();
                 }
             }
         });
@@ -172,6 +179,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
                 Log.e("RECV DATA",data);
                 result = data;
                 Log.e("RESULT DATA",result);
+                if(result != null){
+                    progressDialog.dismiss();
+                }
                 /*
                 if(data.equals("0"))
                 {
@@ -273,5 +283,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder>{
             favorRatingBar = (RatingBar) itemView.findViewById(R.id.favorRate);
             animImageView = (NetworkImageView) itemView.findViewById(R.id.animView);
         }
+
     }
 }
