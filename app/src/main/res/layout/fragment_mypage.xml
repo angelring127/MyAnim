@@ -8,12 +8,18 @@
     tools:context="com.example.sanghoyoun.myanim.MainActivity">
 
 
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView2"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swiftRefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerInParent="true" />
+        >
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <ProgressBar
         android:id="@+id/progressBar2"

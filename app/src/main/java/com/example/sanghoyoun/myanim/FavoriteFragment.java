@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -43,6 +44,10 @@ public class FavoriteFragment extends Fragment implements RecyclerView.OnScrollC
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter adapter;
+
+    //스크롤시 갱신
+    SwipeRefreshLayout swipeRefreshLayout;
+
 
     //Volley Request Queue
     private RequestQueue requestQueue;
@@ -89,6 +94,10 @@ public class FavoriteFragment extends Fragment implements RecyclerView.OnScrollC
 
         //myListAdapter = new ListAdapter(view.getContext(),favorList);
 
+        //스크롤 갱신
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swiftRefreshFavor);
+
+
         //favorListView.setAdapter(myListAdapter);
 
         //list클릭 리스를 추가
@@ -116,6 +125,23 @@ public class FavoriteFragment extends Fragment implements RecyclerView.OnScrollC
 
         //Calling method to get data to fetch data
         getData();
+
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                favorList.clear();
+                requestCount = 1;
+                getData();
+
+
+
+                //갱신후 로딩 화면 제거
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
+
 
 
 

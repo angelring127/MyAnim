@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -41,7 +42,10 @@ public class MyPageFragment extends android.support.v4.app.Fragment implements R
     //Creating Views
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private RecyclerView.Adapter adapter;
+
+
+    //스크롤시 갱신
+    SwipeRefreshLayout swipeRefreshLayout;
 
     //Volley Request Queue
     private RequestQueue requestQueue;
@@ -77,6 +81,8 @@ public class MyPageFragment extends android.support.v4.app.Fragment implements R
     }
 
 
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -88,6 +94,11 @@ public class MyPageFragment extends android.support.v4.app.Fragment implements R
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
+
+        //스크롤 갱신
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swiftRefresh);
+
+
         //favorListView = (ListView) view.findViewById(R.id.favorListview);
 
         //myListAdapter = new ListAdapter(view.getContext(),favorList);
@@ -109,16 +120,30 @@ public class MyPageFragment extends android.support.v4.app.Fragment implements R
         recyclerView.setOnScrollChangeListener(this);
 
         //initializing our adapter
-        adapter = new ListAdapter(favorList, view.getContext());
+        //adapter = new ListAdapter(favorList, view.getContext());
 
         //Adding adapter to recyclerview
-        recyclerView.setAdapter(adapter);
+
 
 
         requestQueue = Volley.newRequestQueue(view.getContext());
 
         //Calling method to get data to fetch data
         getData();
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                favorList.clear();
+                requestCount = 1;
+                getData();
+
+
+
+                //갱신후 로딩 화면 제거
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
 
 
@@ -127,6 +152,7 @@ public class MyPageFragment extends android.support.v4.app.Fragment implements R
 
         return view;
     }
+
 
 
     //Request to get json from server we are passing an integer here
@@ -167,7 +193,7 @@ public class MyPageFragment extends android.support.v4.app.Fragment implements R
 
 
     //This method will get data from the web api
-    private void getData() {
+    public void getData() {
         //Adding the method to the queue by calling the method getDataFromServer
         requestQueue.add(getDataFromServer(requestCount));
         //Incrementing the request counter
@@ -197,6 +223,9 @@ public class MyPageFragment extends android.support.v4.app.Fragment implements R
             //Adding the superhero object to the list
             favorList.add(myanim);
         }
+        RecyclerView.Adapter adapter = new ListAdapter(favorList, view.getContext());
+
+        recyclerView.setAdapter(adapter);
 
         //Notifying the adapter that data has been added or changed
         adapter.notifyDataSetChanged();
@@ -213,6 +242,8 @@ public class MyPageFragment extends android.support.v4.app.Fragment implements R
     }
 
     //Overriden method to detect scrolling
+
+
     @Override
     public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
         //Ifscrolled at last then
@@ -221,4 +252,6 @@ public class MyPageFragment extends android.support.v4.app.Fragment implements R
             getData();
         }
     }
+
+
 }
